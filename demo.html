@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dth XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/Dth/xhtml1-transitional.dth">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./editable-select.css">
+</head>
+<body>
+<select class="ui-select">
+<option value="111">a111</option>
+<option value="222">a222</option>
+<option value="333">a333</option>
+<option value="444">a444</option>
+</select>
+<select class="ui-select">
+<option value="111">b111</option>
+<option value="222">b222</option>
+<option value="333">b333</option>
+<option value="444">b444</option>
+</select>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="./jquery-editable-select.js"></script>
+<script>
+$(function(){
+    $('select').editableSelect();
+});
+</script>
+</body>
+</html>
