@@ -1,6 +1,6 @@
 /*
  * jQuery Editable Select
- * https://github.com/ExactTarget/fuelux
+ * https://github.com/shaoyun/jquery-editable-select
  *
  * Copyright (c) 2016 Shaoyun
  * Licensed under the GPL license.
