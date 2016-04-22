@@ -1,4 +1,11 @@
-.ui-select-wrap {
+/*
+ * jQuery Editable Select
+ * https://github.com/shaoyun/jquery-editable-select
+ *
+ * Copyright (c) 2016 Shaoyun
+ * Licensed under the GPL license.
+ */
+ .ui-select-wrap {
     border: 1px solid #E5E5E5;
     height: 30px;
     width: 30%;
