@@ -19,7 +19,7 @@
             var html = '<div class="' + opts.warpClass + '" tabindex="-1">'
             + '<div class="selected"><span></span>'
             + '<a class="ui-button"><i class="fa fa-angle-down"></i></a></div>'
-            + '<div class="dropdown-box"><div class="inputbox"><input type="text" /></div>'
+            + '<div class="dropdown-box"><div class="inputbox"><input type="text" placeholder="Enter your text" /></div>'
             + '<ul></ul></div></div>';
             var $select     = $(this);
             var $selectWrap = $(html).insertAfter(this);
@@ -90,6 +90,7 @@
                     var $opt = _new_opt(val, val, true);
                     $opt.appendTo($options);
                     $input.val('');
+                    $("<option>").val(val).text(val).appendTo($select);
                     $opt.trigger('click');
                 }
             });
