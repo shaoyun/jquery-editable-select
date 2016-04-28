@@ -11,7 +11,9 @@
     $.fn.editableSelect = function(options) {
         var defaults = {
             warpClass: 'ui-select-wrap',
-            editable: true
+            editable: true,
+            generateValueId: true,
+            onTextCompleted: null
         };
         var opts = $.extend(defaults,options);
 
@@ -69,6 +71,26 @@
                     $downbox.hide();
                 }
             };
+            var _uuid = function(len, radix) {
+                var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+                var uuid = [], i;
+                radix = radix || chars.length;
+
+                if (len) {
+                    for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+                } else {
+                    var r;
+                    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+                    uuid[14] = '4';
+                    for (i = 0; i < 36; i++) {
+                        if (!uuid[i]) {
+                            r = 0 | Math.random()*16;
+                            uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                        }
+                    }
+                }
+                return uuid.join('');
+            };
             $select.find('option').each(function() {
                 var $opt = _new_opt($(this).text(), $(this).val(), $(this).is(":selected"));
                 $opt.appendTo($options);
@@ -94,12 +116,19 @@
                 });
                 $input.bind('keypress',function(event){
                     if(event.keyCode == "13"){
-                        var val = $input.val();
-                        var $opt = _new_opt(val, val, true);
+                        var text = $input.val();
+                        var val = text;
+                        if(opts.generateValueId) {
+                            val = _uuid(8, 16);
+                        }
+                        var $opt = _new_opt(text, val, true);
                         $opt.appendTo($options);
                         $input.val('');
-                        $("<option>").val(val).text(val).attr('data-is-input', 1).appendTo($select);
+                        $("<option>").val(val).text(text).attr('data-is-input', 1).appendTo($select);
                         $opt.trigger('click');
+                        if(opts.onTextCompleted && $.isFunction(opts.onTextCompleted)) {
+                            opts.onTextCompleted({ text: text, value: val, isInput: true });
+                        }
                     }
                 });
             }
